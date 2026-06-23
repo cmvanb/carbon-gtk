@@ -5,9 +5,9 @@
 ##
 
 ## Named palette
-@define-color blue_1   ${color_hash('primary_15')};   @define-color blue_2   ${color_hash('primary_13')};
-@define-color blue_3   ${color_hash('primary_11')};   @define-color blue_4   ${color_hash('primary_9')};
-@define-color blue_5   ${color_hash('primary_7')};
+@define-color blue_1   ${color_hash('blue_9')};   @define-color blue_2   ${color_hash('blue_7')};
+@define-color blue_3   ${color_hash('blue_6')};   @define-color blue_4   ${color_hash('blue_4')};
+@define-color blue_5   ${color_hash('blue_3')};
 
 @define-color green_1  ${color_hash('green_9')};      @define-color green_2  ${color_hash('green_7')};
 @define-color green_3  ${color_hash('green_6')};      @define-color green_4  ${color_hash('green_4')};
@@ -62,21 +62,21 @@
 @define-color error_fg_color white;
 @define-color error_color    @red_3;
 
-@define-color window_bg_color  ${color_hash('primary_2')};
+@define-color window_bg_color  ${color_hash('secondary_2')};
 @define-color window_fg_color  ${color_hash('text_12')};
-@define-color view_bg_color    ${color_hash('primary_1')};
+@define-color view_bg_color    ${color_hash('secondary_1')};
 @define-color view_fg_color    ${color_hash('text_10')};
 
-@define-color headerbar_bg_color         ${color_hash('primary_4')};
+@define-color headerbar_bg_color         ${color_hash('secondary_4')};
 @define-color headerbar_fg_color         ${color_hash('text_15')};
 @define-color headerbar_border_color     ${color_hash('text_15')};
 @define-color headerbar_backdrop_color   @window_bg_color;
 @define-color headerbar_shade_color      rgba(0, 0, 0, 0.36);
 @define-color headerbar_darker_shade_color rgba(0, 0, 0, 0.9);
 
-@define-color sidebar_bg_color           ${color_hash('primary_3')};
+@define-color sidebar_bg_color           ${color_hash('secondary_3')};
 @define-color sidebar_fg_color           ${color_hash('text_14')};
-@define-color sidebar_backdrop_color     ${color_hash('primary_2')};
+@define-color sidebar_backdrop_color     ${color_hash('secondary_2')};
 @define-color sidebar_shade_color        rgba(0, 0, 0, 0.25);
 @define-color sidebar_border_color       rgba(0, 0, 0, 0.36);
 
@@ -84,19 +84,19 @@
 @define-color card_fg_color    ${color_hash('text_15')};
 @define-color card_shade_color rgba(0, 0, 0, 0.36);
 
-@define-color dialog_bg_color    ${color_hash('primary_4')};
+@define-color dialog_bg_color    ${color_hash('secondary_4')};
 @define-color dialog_fg_color    ${color_hash('text_15')};
-@define-color popover_bg_color   ${color_hash('primary_4')};
+@define-color popover_bg_color   ${color_hash('secondary_4')};
 @define-color popover_fg_color   ${color_hash('text_15')};
 @define-color popover_shade_color rgba(0, 0, 0, 0.25);
 
-@define-color thumbnail_bg_color ${color_hash('primary_5')};
+@define-color thumbnail_bg_color ${color_hash('secondary_5')};
 @define-color thumbnail_fg_color ${color_hash('text_15')};
 
 @define-color shade_color             rgba(0, 0, 0, 0.25);
 @define-color scrollbar_outline_color rgba(0, 0, 0, 0.95);
-@define-color incognito_bg_color      ${color_hash('primary_3')};
-@define-color new_title_bg_color      ${color_hash('primary_3')};
+@define-color incognito_bg_color      ${color_hash('secondary_3')};
+@define-color new_title_bg_color      ${color_hash('secondary_3')};
 
 @define-color selection_bg_color ${color_hash('selection_bg')};
 @define-color selection_fg_color ${color_hash('selection_fg')};

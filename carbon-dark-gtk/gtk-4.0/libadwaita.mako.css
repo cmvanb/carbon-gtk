@@ -6,9 +6,9 @@
 
 ## Named palette — CSS custom properties and @define-color in sync
 :root {
-  --blue-1:   ${color_hash('primary_15')};  --blue-2:   ${color_hash('primary_13')};
-  --blue-3:   ${color_hash('primary_11')};  --blue-4:   ${color_hash('primary_9')};
-  --blue-5:   ${color_hash('primary_7')};
+  --blue-1:   ${color_hash('blue_9')};      --blue-2:   ${color_hash('blue_7')};
+  --blue-3:   ${color_hash('blue_6')};      --blue-4:   ${color_hash('blue_4')};
+  --blue-5:   ${color_hash('blue_3')};
 
   --green-1:  ${color_hash('green_9')};     --green-2:  ${color_hash('green_7')};
   --green-3:  ${color_hash('green_6')};     --green-4:  ${color_hash('green_4')};
@@ -43,9 +43,9 @@
   --dark-5:   ${color_hash('gray_0')};
 }
 
-@define-color blue_1   ${color_hash('primary_15')};   @define-color blue_2   ${color_hash('primary_13')};
-@define-color blue_3   ${color_hash('primary_11')};   @define-color blue_4   ${color_hash('primary_9')};
-@define-color blue_5   ${color_hash('primary_7')};
+@define-color blue_1   ${color_hash('blue_9')};       @define-color blue_2   ${color_hash('blue_7')};
+@define-color blue_3   ${color_hash('blue_6')};       @define-color blue_4   ${color_hash('blue_4')};
+@define-color blue_5   ${color_hash('blue_3')};
 
 @define-color green_1  ${color_hash('green_9')};      @define-color green_2  ${color_hash('green_7')};
 @define-color green_3  ${color_hash('green_6')};      @define-color green_4  ${color_hash('green_4')};
@@ -100,27 +100,27 @@
 @define-color error_fg_color white;
 @define-color error_color    oklab(from @error_bg_color max(l, 0.85) a b);
 
-@define-color window_bg_color  ${color_hash('primary_2')};
+@define-color window_bg_color  ${color_hash('secondary_2')};
 @define-color window_fg_color  ${color_hash('text_12')};
-@define-color view_bg_color    ${color_hash('primary_1')};
+@define-color view_bg_color    ${color_hash('secondary_1')};
 @define-color view_fg_color    ${color_hash('text_10')};
 
-@define-color headerbar_bg_color           ${color_hash('primary_4')};
+@define-color headerbar_bg_color           ${color_hash('secondary_4')};
 @define-color headerbar_fg_color           ${color_hash('text_15')};
 @define-color headerbar_border_color       ${color_hash('text_15')};
 @define-color headerbar_backdrop_color     @window_bg_color;
 @define-color headerbar_shade_color        rgba(0, 0, 0, 0.36);
 @define-color headerbar_darker_shade_color rgba(0, 0, 0, 0.9);
 
-@define-color sidebar_bg_color             ${color_hash('primary_3')};
+@define-color sidebar_bg_color             ${color_hash('secondary_3')};
 @define-color sidebar_fg_color             ${color_hash('text_14')};
-@define-color sidebar_backdrop_color       ${color_hash('primary_2')};
+@define-color sidebar_backdrop_color       ${color_hash('secondary_2')};
 @define-color sidebar_shade_color          rgba(0, 0, 0, 0.25);
 @define-color sidebar_border_color         rgba(0, 0, 0, 0.36);
 
-@define-color secondary_sidebar_bg_color        ${color_hash('primary_2')};
+@define-color secondary_sidebar_bg_color        ${color_hash('secondary_2')};
 @define-color secondary_sidebar_fg_color        ${color_hash('text_12')};
-@define-color secondary_sidebar_backdrop_color  ${color_hash('primary_1')};
+@define-color secondary_sidebar_backdrop_color  ${color_hash('secondary_1')};
 @define-color secondary_sidebar_shade_color     rgba(0, 0, 0, 0.25);
 @define-color secondary_sidebar_border_color    rgba(0, 0, 0, 0.36);
 
@@ -128,13 +128,13 @@
 @define-color card_fg_color    ${color_hash('text_15')};
 @define-color card_shade_color rgba(0, 0, 0, 0.36);
 
-@define-color dialog_bg_color    ${color_hash('primary_4')};
+@define-color dialog_bg_color    ${color_hash('secondary_4')};
 @define-color dialog_fg_color    ${color_hash('text_15')};
-@define-color popover_bg_color   ${color_hash('primary_4')};
+@define-color popover_bg_color   ${color_hash('secondary_4')};
 @define-color popover_fg_color   ${color_hash('text_15')};
 @define-color popover_shade_color rgba(0, 0, 0, 0.25);
 
-@define-color thumbnail_bg_color ${color_hash('primary_5')};
+@define-color thumbnail_bg_color ${color_hash('secondary_5')};
 @define-color thumbnail_fg_color ${color_hash('text_15')};
 
 @define-color shade_color             rgba(0, 0, 0, 0.25);
