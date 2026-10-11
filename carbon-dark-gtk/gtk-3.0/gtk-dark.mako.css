@@ -1,2 +1,3 @@
-## Carbon Dark GTK3 dark variant — identical to gtk.css for a dark-only theme.
+## Carbon GTK3 dark variant request. Each carbon theme has a single variant, so
+## this is identical to gtk.css.
 @import url("gtk.css");

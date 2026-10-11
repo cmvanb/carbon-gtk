@@ -1,104 +1,87 @@
 ##
-## Carbon Dark libadwaita theme.
-## Generated from the carbon-dark theme at deploy time.
+## Carbon libadwaita theme.
+## Generated from the active carbon scheme at deploy time.
 ## Structure: palette → semantic colors → widget CSS (tail) → tweaks.
 ##
+<%
+    # Adwaita's named palette is absolute (1 = lightest) while carbon steps are
+    # indexed by contrast against the canvas, so the order flips per variant.
+    named = {
+        'dark': {
+            'blue':   ['blue_9', 'blue_7', 'blue_6', 'blue_4', 'blue_3'],
+            'green':  ['green_9', 'green_7', 'green_6', 'green_4', 'green_3'],
+            'yellow': ['yellow_9', 'yellow_7', 'yellow_5', 'yellow_4', 'yellow_3'],
+            'orange': ['orange_9', 'orange_8', 'orange_6', 'orange_5', 'orange_3'],
+            'red':    ['red_9', 'red_8', 'red_7', 'red_5', 'red_4'],
+            'purple': ['purple_9', 'purple_7', 'purple_5', 'purple_4', 'purple_3'],
+            'brown':  ['text_9', 'text_7', 'text_5', 'text_4', 'text_2'],
+            'light':  ['text_15', 'text_14', 'text_12', 'text_10', 'text_8'],
+            'dark':   ['gray_9', 'gray_6', 'gray_4', 'gray_2', 'gray_0'],
+        },
+        'light': {
+            'blue':   ['blue_2', 'blue_3', 'blue_4', 'blue_6', 'blue_8'],
+            'green':  ['green_1', 'green_2', 'green_3', 'green_4', 'green_6'],
+            'yellow': ['yellow_1', 'yellow_2', 'yellow_3', 'yellow_5', 'yellow_7'],
+            'orange': ['orange_2', 'orange_3', 'orange_4', 'orange_5', 'orange_7'],
+            'red':    ['red_2', 'red_3', 'red_4', 'red_5', 'red_7'],
+            'purple': ['purple_3', 'purple_4', 'purple_5', 'purple_7', 'purple_9'],
+            'brown':  ['text_3', 'text_5', 'text_7', 'text_9', 'text_11'],
+            'light':  ['canvas', 'gray_1', 'gray_3', 'gray_5', 'gray_7'],
+            'dark':   ['gray_9', 'gray_11', 'gray_12', 'gray_14', 'gray_15'],
+        },
+    }[scheme_variant]
+
+    # Shadows read stronger on dark surfaces.
+    shade = {
+        'dark':  {'headerbar': 0.36, 'headerbar_darker': 0.9, 'sidebar': 0.25, 'card': 0.36,
+                  'popover': 0.25, 'shade': 0.25},
+        'light': {'headerbar': 0.12, 'headerbar_darker': 0.12, 'sidebar': 0.07, 'card': 0.07,
+                  'popover': 0.07, 'shade': 0.07},
+    }[scheme_variant]
+
+    card_bg = 'rgba(255, 255, 255, 0.06)' if scheme_variant == 'dark' else color_css_rgba('canvas', 0.8)
+    scrollbar_outline = color_css_rgba('shadow', 0.95) if scheme_variant == 'dark' else color_css_rgba('canvas', 0.5)
+
+    # Standalone colors (text and icons on the window) need to be light on
+    # dark surfaces and dark on light ones.
+    standalone = 'max(l, 0.85)' if scheme_variant == 'dark' else 'min(l, 0.5)'
+%>
 
 ## Named palette — CSS custom properties and @define-color in sync
 :root {
-  --blue-1:   ${color_hash('blue_9')};      --blue-2:   ${color_hash('blue_7')};
-  --blue-3:   ${color_hash('blue_6')};      --blue-4:   ${color_hash('blue_4')};
-  --blue-5:   ${color_hash('blue_3')};
-
-  --green-1:  ${color_hash('green_9')};     --green-2:  ${color_hash('green_7')};
-  --green-3:  ${color_hash('green_6')};     --green-4:  ${color_hash('green_4')};
-  --green-5:  ${color_hash('green_3')};
-
-  --yellow-1: ${color_hash('yellow_9')};    --yellow-2: ${color_hash('yellow_7')};
-  --yellow-3: ${color_hash('yellow_5')};    --yellow-4: ${color_hash('yellow_4')};
-  --yellow-5: ${color_hash('yellow_3')};
-
-  --orange-1: ${color_hash('orange_9')};    --orange-2: ${color_hash('orange_8')};
-  --orange-3: ${color_hash('orange_6')};    --orange-4: ${color_hash('orange_5')};
-  --orange-5: ${color_hash('orange_3')};
-
-  --red-1:    ${color_hash('red_9')};       --red-2:    ${color_hash('red_8')};
-  --red-3:    ${color_hash('red_7')};       --red-4:    ${color_hash('red_5')};
-  --red-5:    ${color_hash('red_4')};
-
-  --purple-1: ${color_hash('purple_9')};    --purple-2: ${color_hash('purple_7')};
-  --purple-3: ${color_hash('purple_5')};    --purple-4: ${color_hash('purple_4')};
-  --purple-5: ${color_hash('purple_3')};
-
-  --brown-1:  ${color_hash('text_9')};      --brown-2:  ${color_hash('text_7')};
-  --brown-3:  ${color_hash('text_5')};      --brown-4:  ${color_hash('text_4')};
-  --brown-5:  ${color_hash('text_2')};
-
-  --light-1:  ${color_hash('text_15')};     --light-2:  ${color_hash('text_14')};
-  --light-3:  ${color_hash('text_12')};     --light-4:  ${color_hash('text_10')};
-  --light-5:  ${color_hash('text_8')};
-
-  --dark-1:   ${color_hash('gray_9')};      --dark-2:   ${color_hash('gray_6')};
-  --dark-3:   ${color_hash('gray_4')};      --dark-4:   ${color_hash('gray_2')};
-  --dark-5:   ${color_hash('gray_0')};
+% for hue, steps in named.items():
+% for i, step in enumerate(steps):
+  --${hue}-${i + 1}: ${color_hash(step)};
+% endfor
+% endfor
 }
 
-@define-color blue_1   ${color_hash('blue_9')};       @define-color blue_2   ${color_hash('blue_7')};
-@define-color blue_3   ${color_hash('blue_6')};       @define-color blue_4   ${color_hash('blue_4')};
-@define-color blue_5   ${color_hash('blue_3')};
-
-@define-color green_1  ${color_hash('green_9')};      @define-color green_2  ${color_hash('green_7')};
-@define-color green_3  ${color_hash('green_6')};      @define-color green_4  ${color_hash('green_4')};
-@define-color green_5  ${color_hash('green_3')};
-
-@define-color yellow_1 ${color_hash('yellow_9')};     @define-color yellow_2 ${color_hash('yellow_7')};
-@define-color yellow_3 ${color_hash('yellow_5')};     @define-color yellow_4 ${color_hash('yellow_4')};
-@define-color yellow_5 ${color_hash('yellow_3')};
-
-@define-color orange_1 ${color_hash('orange_9')};     @define-color orange_2 ${color_hash('orange_8')};
-@define-color orange_3 ${color_hash('orange_6')};     @define-color orange_4 ${color_hash('orange_5')};
-@define-color orange_5 ${color_hash('orange_3')};
-
-@define-color red_1    ${color_hash('red_9')};        @define-color red_2    ${color_hash('red_8')};
-@define-color red_3    ${color_hash('red_7')};        @define-color red_4    ${color_hash('red_5')};
-@define-color red_5    ${color_hash('red_4')};
-
-@define-color purple_1 ${color_hash('purple_9')};     @define-color purple_2 ${color_hash('purple_7')};
-@define-color purple_3 ${color_hash('purple_5')};     @define-color purple_4 ${color_hash('purple_4')};
-@define-color purple_5 ${color_hash('purple_3')};
-
-@define-color brown_1  ${color_hash('text_9')};       @define-color brown_2  ${color_hash('text_7')};
-@define-color brown_3  ${color_hash('text_5')};       @define-color brown_4  ${color_hash('text_4')};
-@define-color brown_5  ${color_hash('text_2')};
-
-@define-color light_1  ${color_hash('text_15')};      @define-color light_2  ${color_hash('text_14')};
-@define-color light_3  ${color_hash('text_12')};      @define-color light_4  ${color_hash('text_10')};
-@define-color light_5  ${color_hash('text_8')};
-
-@define-color dark_1   ${color_hash('gray_9')};       @define-color dark_2   ${color_hash('gray_6')};
-@define-color dark_3   ${color_hash('gray_4')};       @define-color dark_4   ${color_hash('gray_2')};
-@define-color dark_5   ${color_hash('gray_0')};
+% for hue, steps in named.items():
+% for i, step in enumerate(steps):
+@define-color ${hue}_${i + 1} ${color_hash(step)};
+% endfor
+% endfor
 
 ## Semantic colors
 @define-color accent_bg_color  ${color_hash('gtk_accent_bg')};
 @define-color accent_fg_color  ${color_hash('gtk_accent_fg')};
-@define-color accent_color     oklab(from @accent_bg_color max(l, 0.85) a b);
+@define-color accent_color     oklab(from @accent_bg_color ${standalone} a b);
 
 @define-color destructive_bg_color ${color_hash('red_5')};
 @define-color destructive_fg_color white;
-@define-color destructive_color    oklab(from @destructive_bg_color max(l, 0.85) a b);
+@define-color destructive_color    oklab(from @destructive_bg_color ${standalone} a b);
 
 @define-color success_bg_color ${color_hash('green_4')};
 @define-color success_fg_color white;
-@define-color success_color    oklab(from @success_bg_color max(l, 0.85) a b);
+@define-color success_color    oklab(from @success_bg_color ${standalone} a b);
 
 @define-color warning_bg_color ${color_hash('orange_6')};
-@define-color warning_fg_color rgba(0, 0, 0, 0.8);
-@define-color warning_color    oklab(from @warning_bg_color max(l, 0.85) a b);
+@define-color warning_fg_color ${color_css_rgba('canvas', 0.8)};
+@define-color warning_color    oklab(from @warning_bg_color ${standalone} a b);
 
 @define-color error_bg_color ${color_hash('red_5')};
 @define-color error_fg_color white;
-@define-color error_color    oklab(from @error_bg_color max(l, 0.85) a b);
+@define-color error_color    oklab(from @error_bg_color ${standalone} a b);
 
 @define-color window_bg_color  ${color_hash('gtk_window_bg')};
 @define-color window_fg_color  ${color_hash('gtk_window_fg')};
@@ -109,36 +92,36 @@
 @define-color headerbar_fg_color           ${color_hash('gtk_headerbar_fg')};
 @define-color headerbar_border_color       ${color_hash('gtk_headerbar_fg')};
 @define-color headerbar_backdrop_color     @window_bg_color;
-@define-color headerbar_shade_color        rgba(0, 0, 0, 0.36);
-@define-color headerbar_darker_shade_color rgba(0, 0, 0, 0.9);
+@define-color headerbar_shade_color        ${color_css_rgba('shadow', shade['headerbar'])};
+@define-color headerbar_darker_shade_color ${color_css_rgba('shadow', shade['headerbar_darker'])};
 
 @define-color sidebar_bg_color             ${color_hash('gtk_sidebar_bg')};
 @define-color sidebar_fg_color             ${color_hash('gtk_sidebar_fg')};
 @define-color sidebar_backdrop_color       ${color_hash('gtk_sidebar_backdrop')};
-@define-color sidebar_shade_color          rgba(0, 0, 0, 0.25);
-@define-color sidebar_border_color         rgba(0, 0, 0, 0.36);
+@define-color sidebar_shade_color          ${color_css_rgba('shadow', shade['sidebar'])};
+@define-color sidebar_border_color         ${color_css_rgba('shadow', shade['card'])};
 
 @define-color secondary_sidebar_bg_color        ${color_hash('gtk_window_bg')};
 @define-color secondary_sidebar_fg_color        ${color_hash('gtk_window_fg')};
 @define-color secondary_sidebar_backdrop_color  ${color_hash('gtk_view_bg')};
-@define-color secondary_sidebar_shade_color     rgba(0, 0, 0, 0.25);
-@define-color secondary_sidebar_border_color    rgba(0, 0, 0, 0.36);
+@define-color secondary_sidebar_shade_color     ${color_css_rgba('shadow', shade['sidebar'])};
+@define-color secondary_sidebar_border_color    ${color_css_rgba('shadow', shade['card'])};
 
-@define-color card_bg_color    rgba(255, 255, 255, 0.06);
+@define-color card_bg_color    ${card_bg};
 @define-color card_fg_color    ${color_hash('gtk_popover_fg')};
-@define-color card_shade_color rgba(0, 0, 0, 0.36);
+@define-color card_shade_color ${color_css_rgba('shadow', shade['card'])};
 
 @define-color dialog_bg_color    ${color_hash('gtk_popover_bg')};
 @define-color dialog_fg_color    ${color_hash('gtk_popover_fg')};
 @define-color popover_bg_color   ${color_hash('gtk_popover_bg')};
 @define-color popover_fg_color   ${color_hash('gtk_popover_fg')};
-@define-color popover_shade_color rgba(0, 0, 0, 0.25);
+@define-color popover_shade_color ${color_css_rgba('shadow', shade['popover'])};
 
 @define-color thumbnail_bg_color ${color_hash('gtk_thumbnail_bg')};
 @define-color thumbnail_fg_color ${color_hash('gtk_popover_fg')};
 
-@define-color shade_color             rgba(0, 0, 0, 0.25);
-@define-color scrollbar_outline_color rgba(0, 0, 0, 0.95);
+@define-color shade_color             ${color_css_rgba('shadow', shade['shade'])};
+@define-color scrollbar_outline_color ${scrollbar_outline};
 
 ## Widget CSS (upstream libadwaita-tail, then our tweaks)
 <%include file="libadwaita-tail.css"/>
